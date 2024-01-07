@@ -1,0 +1,10 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet' href='/styles/style.css')
+    body(class="bg-[#353535]").flex.flex-col.h-screen
+        include header
+        div.flex.h-full
+            include sidebar
+            include categories
