@@ -9,17 +9,17 @@
 
 
 .header-gradient {
-    background: linear-gradient(to right, #245792, #245792 20%,#348fff0c);
+    background: linear-gradient(to right, #245792, #245792 20%, #348fff0c);
 }
 
 .header-shadow {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.397);
 }
-   
+
 .sidebar-gradient {
-    background: linear-gradient(#1F5A6C,#1F5A6C,#2f90ff0e)
+    background: linear-gradient(#1F5A6C, #1F5A6C, #2f90ff0e)
 }
 
 .sidebar-selection-gradient {
-    background: linear-gradient(to right, #d9d9d92a,#d9d9d90a 80%,#d9d9d900)
+    background: linear-gradient(to right, #d9d9d92a, #d9d9d90a 80%, #d9d9d900)
 }

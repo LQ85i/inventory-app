@@ -1,7 +1,8 @@
-categories.text-white.w-full.p-4
+items.text-white.w-full.p-4
   div.flex.flex-row.font-bold
+    button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b]" onclick=`window.location.href="/categories"`) Back
     div.text-lg.font-bold.flex.items-center.p-2
-      span Categories
+      span= currentCategory.name
     div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search bar 
     button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]") + New Item 
     button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]") + New Category 
@@ -12,7 +13,8 @@ categories.text-white.w-full.p-4
       span Price 
       span Total value
     div.p-3
-      each category, index in categories
-        div.my-1(data-category-id=category._id onclick=`window.location.href="/categories/${category._id}"`)
-          div.p-1
-            span= category.name
+      if items.length > 0
+        each item, index in items
+          if String(item.category) === String(currentCategory._id)
+            div.p-1(data-item-id=item._id class="border-b-[2px] border-[#ffffff41]") 
+              span= item.name
