@@ -1,4 +1,4 @@
-sidebar.z-0.flex.flex-col.py-2.w-64.h-full.text-white.font-bold.text-base(class="sidebar-gradient")
+sidebar.z-0.flex.flex-col.py-2.min-w-64.h-full.text-white.font-bold.text-base(class="sidebar-gradient")
     div.pl-5.py-3.my-1 Dashboard
-    div.pl-5.py-3.my-1(class="sidebar-selection-gradient") Categories
+    div.pl-5.py-3.my-1(class=`${page === "categories" || page === "items" ? "sidebar-selection-gradient": ""}` onclick=`window.location.href="/categories"`) Categories
     div.pl-5.py-3.my-1 Settings
