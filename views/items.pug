@@ -1,11 +1,11 @@
 items.text-white.w-full.p-4
   div.flex.flex-row.font-bold
-    button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b]" onclick=`window.location.href="/categories"`) Back
+    button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b] hover:cursor-pointer hover:ring" onclick=`window.location.href="/categories"`) Back
     div.text-lg.font-bold.flex.items-center.p-2
       span= currentCategory.name
-    div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search bar 
-    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]") + New Item 
-    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]") + New Category 
+    div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search
+    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-item"`) + New Item 
+    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-category"`) + New Category 
   div.mt-3.flex.flex-col
     div.p-3.flex.justify-between.border-b-2(class="border-[#50aaff6c]")
       span Name 

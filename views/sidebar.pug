@@ -1,4 +1,8 @@
-sidebar.z-0.flex.flex-col.py-2.min-w-64.h-full.text-white.font-bold.text-base(class="sidebar-gradient")
-    div.pl-5.py-3.my-1 Dashboard
-    div.pl-5.py-3.my-1(class=`${page === "categories" || page === "items" ? "sidebar-selection-gradient": ""}` onclick=`window.location.href="/categories"`) Categories
-    div.pl-5.py-3.my-1 Settings
+sidebar.z-0.flex.flex-col.py-2.min-w-52.h-full.text-white.font-bold.text-base(class="sidebar-gradient")
+    div.pl-5.py-3.my-1.flex
+        span Dashboard 
+        img.ml-auto.mr-4.w-5.opacity-50(class="icon-b-to-w" src='/images/icon_lock.svg', alt='Icon Lock')
+    div.pl-5.py-3.my-1(class=`${page === "categories" || page === "items" || page === "new-category" || page === "new-item" ? "sidebar-selection-gradient": "hover:cursor-pointer hover:ring"}` onclick=`window.location.href="/categories"`) Categories
+    div.pl-5.py-3.my-1.flex
+        span Settings 
+        img.ml-auto.mr-4.w-5.opacity-50(class="icon-b-to-w" src='/images/icon_lock.svg', alt='Icon Lock')

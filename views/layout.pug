@@ -7,7 +7,11 @@ html
     include header
     div.flex.h-full
       include sidebar
-      if currentCategory
+      if page === "items"
         include items
-      else
+      else if page === "categories"
         include categories
+      else if page === "new-category"
+        include new-category
+      else if page === "new-item"
+        include new-item
