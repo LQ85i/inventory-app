@@ -3,8 +3,8 @@ categories.text-white.w-full.p-4
     div.text-lg.font-bold.flex.items-center.p-2
       span Categories
     div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search 
-    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-item"`) + New Item 
-    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-category"`) + New Category 
+    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/items/new"`) + New Item 
+    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new"`) + New Category 
   div.mt-3.flex.flex-col
     div.p-3.flex.justify-between.border-b-2(class="border-[#50aaff6c]")
       span Name 
@@ -12,7 +12,15 @@ categories.text-white.w-full.p-4
       span Price 
       span Total value
     div.p-3
-      each category, index in categories
-        div.my-1(class="hover:cursor-pointer hover:ring" data-category-id=category._id onclick=`window.location.href="/categories/${category._id}"`)
+      each category, index in categories 
+        div.my-1.flex.justify-between(class="hover:cursor-pointer hover:ring bg-[#8a8f9418]" data-category-id=category._id onclick=`window.location.href="/categories/${category._id}"`)
           div.p-1
             span= category.name
+          div.flex.gap-1
+            form(action=`/categories/edit/${category._id}` method='POST') 
+              input(type="hidden" name="categoryID" value=category._id)
+              input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="edit")
+            form(action="/categories/delete" method='POST') 
+              input(type="hidden" name="categoryID" value=category._id)
+              input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="delete")
+            

@@ -1,7 +1,7 @@
-new-category.text-white.w-full.p-4
+edit-category.text-white.w-full.p-4
   button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b] hover:cursor-pointer hover:ring" onclick=`window.location.href="/categories"`) 
     span Back
-  form(action="/categories/create" method='POST') 
+  form(action="/categories/update" method='POST') 
     h4.mt-6.text-xl.border-b-2.border-gray-500.pb-2 Add category
     label.mt-4.flex.h-8.items-center(for="name")
       span.w-32 Category name: 
@@ -17,4 +17,5 @@ new-category.text-white.w-full.p-4
     br
     div.border-t-2.border-gray-500.pt-4
     label.flex.h-8.w-24.items-center.justify-center.rounded.py-1.px-4.border-2(class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" for="submit")
+      input(type="hidden" name="categoryID" value=categoryID)
       input.text-white(id="submit" type="submit" value="Submit")

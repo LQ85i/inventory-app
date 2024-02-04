@@ -4,8 +4,8 @@ items.text-white.w-full.p-4
     div.text-lg.font-bold.flex.items-center.p-2
       span= currentCategory.name
     div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search
-    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-item"`) + New Item 
-    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new-category"`) + New Category 
+    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/items/new"`) + New Item 
+    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new"`) + New Category 
   div.mt-3.flex.flex-col
     div.p-3.flex.justify-between.border-b-2(class="border-[#50aaff6c]")
       span Name 
@@ -16,5 +16,5 @@ items.text-white.w-full.p-4
       if items.length > 0
         each item, index in items
           if String(item.category) === String(currentCategory._id)
-            div.p-1(data-item-id=item._id class="border-b-[2px] border-[#ffffff41]") 
+            div.my-1.p-1(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
               span= item.name
