@@ -16,5 +16,14 @@ items.text-white.w-full.p-4
       if items.length > 0
         each item, index in items
           if String(item.category) === String(currentCategory._id)
-            div.my-1.p-1(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
-              span= item.name
+            div.my-1.flex.justify-between(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
+              div.p-1
+                span= item.name
+              div.flex.gap-1
+                form(action=`/items/edit/${item._id}` method='POST') 
+                  input(type="hidden" name="itemID" value=item._id)
+                  input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="edit")
+                form(action="/items/delete" method='POST') 
+                  input(type="hidden" name="itemID" value=item._id)
+                  input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="delete")
+            

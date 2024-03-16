@@ -20,7 +20,8 @@ exports.add_item = asyncHandler(async (req, res, next) => {
         price: price,
         stock: stock,
         URL: URL,
-        category: category
+        category: category,
+        expiresAfter: new Date()
     });
     res.redirect("/categories");
 });
@@ -32,12 +33,32 @@ exports.render_item = asyncHandler(async (req, res, next) => {
 
 
 exports.update_item = asyncHandler(async (req, res, next) => {
-
+    const itemID = req.body.itemID;
+    const newName = req.body.itemName;
+    const newDescription = req.body.itemDescription;
+    const newPrice = req.body.itemPrice;
+    const newStock = req.body.itemStock;
+    const newURL = req.body.itemURL;
+    const newCategory = req.body.itemCategory;
+    await Item.findOneAndUpdate({ _id: itemID, }, {
+        $set: {
+            name: newName,
+            description: newDescription,
+            price: newPrice,
+            stock: newStock,
+            URL: newURL,
+            category: newCategory,
+            expiresAfter: new Date()
+        }
+    });
+    res.redirect("/categories");
 });
 
 
 exports.delete_item = asyncHandler(async (req, res, next) => {
-
+    const itemID = req.body.itemID;
+    await Item.deleteOne({ _id: itemID });
+    res.redirect("/categories");
 });
 
 
@@ -49,9 +70,11 @@ exports.render_add_form = asyncHandler(async (req, res, next) => {
 
 
 exports.render_edit_form = asyncHandler(async (req, res, next) => {
-    const IDToEdit = req.body.categoryID;
+    const IDToEdit = req.body.itemID;
     const page = "edit-item"
+    const item = await Item.findOne({ _id: IDToEdit })
+    const category = await Category.findOne({ _id: item.category });
     categoryData = await Category.find({}).exec();
-    res.render('layout', { title: 'Edit Item', page: page, categories: categoryData, IDToEdit: IDToEdit });
+    res.render('layout', { title: 'Edit Item', page: page, categories: categoryData, IDToEdit: IDToEdit, item: item, category: category });
 });
 

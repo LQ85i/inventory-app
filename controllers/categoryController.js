@@ -11,7 +11,12 @@ exports.add_category = asyncHandler(async (req, res, next) => {
     const name = req.body.categoryName;
     const description = req.body.categoryDescription;
     const URL = req.body.categoryURL;
-    await Category.create({ name: name, description: description, URL: URL });
+    await Category.create({
+        name: name,
+        description: description,
+        URL: URL,
+        expiresAfter: new Date()
+    });
     res.redirect("/categories");
 });
 
@@ -31,7 +36,8 @@ exports.update_category = asyncHandler(async (req, res, next) => {
         $set: {
             name: newName,
             description: newDescription,
-            URL: newURL
+            URL: newURL,
+            expiresAfter: new Date()
         }
     });
     res.redirect("/categories");
@@ -39,7 +45,7 @@ exports.update_category = asyncHandler(async (req, res, next) => {
 
 exports.delete_category = asyncHandler(async (req, res, next) => {
     const categoryID = req.body.categoryID;
-    await Category.deleteOne({_id: categoryID});
+    await Category.deleteOne({ _id: categoryID });
     res.redirect("/categories");
 });
 
@@ -52,8 +58,8 @@ exports.render_add_form = asyncHandler(async (req, res, next) => {
 exports.render_edit_form = asyncHandler(async (req, res, next) => {
     const categoryID = req.body.categoryID;
     const page = "edit-category"
-    res.render('layout', { title: 'Edit Category', page: page, categoryID: categoryID });
-    res.redirect("/categories");
+    const category = await Category.findById(categoryID).exec();
+    res.render('layout', { title: 'Edit Category', category: category, page: page, categoryID: categoryID });
 });
 
 exports.render_items = asyncHandler(async (req, res, next) => {

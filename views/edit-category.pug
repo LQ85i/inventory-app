@@ -2,18 +2,18 @@ edit-category.text-white.w-full.p-4
   button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b] hover:cursor-pointer hover:ring" onclick=`window.location.href="/categories"`) 
     span Back
   form(action="/categories/update" method='POST') 
-    h4.mt-6.text-xl.border-b-2.border-gray-500.pb-2 Add category
+    h4.mt-6.text-xl.border-b-2.border-gray-500.pb-2 Edit category
     label.mt-4.flex.h-8.items-center(for="name")
       span.w-32 Category name: 
-      input.border-2.p-1(id="name" type="text" name="categoryName" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
+      input.border-2.p-1(id="name" type="text" value=category.name name="categoryName" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
     br
     label.flex.h-8.items-center(for="description") 
       span.w-32 Description: 
-      input.border-2.p-1(id="description" type="text" name="categoryDescription" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
+      input.border-2.p-1(id="description" type="text" value=category.description name="categoryDescription" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
     br
     label.flex.h-8.items-center(for="url") 
       span.w-32 URL address: 
-      input.border-2.p-1(id="url" type="text" name="categoryURL" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
+      input.border-2.p-1(id="url" type="text" value=category.URL name="categoryURL" class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)
     br
     div.border-t-2.border-gray-500.pt-4
     label.flex.h-8.w-24.items-center.justify-center.rounded.py-1.px-4.border-2(class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" for="submit")
