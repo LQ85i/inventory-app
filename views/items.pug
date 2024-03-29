@@ -1,10 +1,10 @@
 items.text-white.w-full.p-4
   div.flex.flex-row.font-bold.items-center
-    button.h-10.ml-3.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457] hover:cursor-pointer" onclick=`window.location.href="/categories"`) Back
+    button.h-10.ml-3(class="button-type1" onclick=`window.location.href="/categories"`) Back
     div.text-lg.font-bold.flex.items-center.p-2.ml-2
       span= currentCategory.name
-    button.h-10.ml-auto.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/items/new"`) + New Item 
-    button.h-10.ml-3.mr-3.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/categories/new"`) + New Category 
+    button.h-10.ml-auto(class="button-type1" onclick=`window.location.href="/items/new"`) + New Item 
+    button.h-10.ml-3.mr-3(class="button-type1" onclick=`window.location.href="/categories/new"`) + New Category 
   div.mt-3.flex.flex-col
     div.mx-3.pb-1.flex.justify-between.border-b-2.w-auto.text-sm(class="border-[#50aaff6c]")
       span.truncate(class="w-[18%]") Name 
@@ -17,7 +17,7 @@ items.text-white.w-full.p-4
       if items.length > 0
         each item, index in items
           if String(item.category) === String(currentCategory._id)
-            div.my-1.flex.justify-between.items-center.text-sm(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
+            div.my-1.flex.justify-between.items-center.text-sm(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418] hover:bg-[#64686b57]") 
               div.p-1.truncate(class="w-[18%]")
                 span= item.name
               div.p-1.truncate(class="w-[18%]")

@@ -26,3 +26,37 @@
 .icon-b-to-w {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(288deg) brightness(105%) contrast(106%);
 }
+
+.button-type1 {
+    border: 2px solid #aeb4bb33;
+    background-color: #8a8f9418;
+    border-radius: 0.25rem;
+    padding: 0 0.5rem;
+}
+
+.button-type1:hover {
+    background-color: #8a8f9457;
+    cursor: pointer;
+}
+
+.button-type1:active {
+    background-color: #61646857;
+}
+
+
+.button-type2 {
+    border: 2px solid #50aaff81;
+    background-color: #152e4483;
+    border-radius: 0.25rem;
+    padding: 0 16px;
+}
+
+.button-type2:hover {
+    cursor: pointer;
+    background-color: #335f8683;
+}
+
+.button-type2:active {
+    background-color: #23425e83;
+    
+}
