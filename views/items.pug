@@ -1,29 +1,37 @@
 items.text-white.w-full.p-4
-  div.flex.flex-row.font-bold
-    button.h-10.ml-3.border-2.rounded(class="border-[#ffffff4b] hover:cursor-pointer hover:ring" onclick=`window.location.href="/categories"`) Back
-    div.text-lg.font-bold.flex.items-center.p-2
+  div.flex.flex-row.font-bold.items-center
+    button.h-10.ml-3.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457] hover:cursor-pointer" onclick=`window.location.href="/categories"`) Back
+    div.text-lg.font-bold.flex.items-center.p-2.ml-2
       span= currentCategory.name
-    div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search
-    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/items/new"`) + New Item 
-    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new"`) + New Category 
+    button.h-10.ml-auto.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/items/new"`) + New Item 
+    button.h-10.ml-3.mr-3.rounded.px-2(class="bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/categories/new"`) + New Category 
   div.mt-3.flex.flex-col
-    div.p-3.flex.justify-between.border-b-2(class="border-[#50aaff6c]")
-      span Name 
-      span Count
-      span Price 
-      span Total value
-    div.p-3
+    div.mx-3.pb-1.flex.justify-between.border-b-2.w-auto.text-sm(class="border-[#50aaff6c]")
+      span.truncate(class="w-[18%]") Name 
+      span.truncate(class="w-[18%]") Description
+      span.truncate(class="w-[18%]") Price
+      span.truncate(class="w-[18%]") Stock
+      span.truncate(class="w-[18%]") URL 
+      span.truncate(class="w-[10%]")
+    div.mx-3
       if items.length > 0
         each item, index in items
           if String(item.category) === String(currentCategory._id)
-            div.my-1.flex.justify-between(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
-              div.p-1
+            div.my-1.flex.justify-between.items-center.text-sm(data-item-id=item._id class="border-[#ffffff41] bg-[#8a8f9418]") 
+              div.p-1.truncate(class="w-[18%]")
                 span= item.name
-              div.flex.gap-1
-                form(action=`/items/edit/${item._id}` method='POST') 
+              div.p-1.truncate(class="w-[18%]")
+                span= item.description
+              div.p-1.truncate(class="w-[18%]")
+                span= item.price
+              div.p-1.truncate(class="w-[18%]")
+                span= item.stock
+              div.p-1.truncate(class="w-[18%]")
+                span= item.URL
+              div.flex.items-center(class="w-[10%]")
+                form.flex.items-center.ml-auto(action=`/items/edit/${item._id}` method='POST') 
                   input(type="hidden" name="itemID" value=item._id)
-                  input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="edit")
-                form(action="/items/delete" method='POST') 
+                  input.w-5.opacity-30(class="hover:cursor-pointer hover:opacity-100 icon-b-to-w" src='/images/icon_edit.svg' type="image", alt='Icon Edit')
+                form.flex.items-center(action="/items/delete" method='POST') 
                   input(type="hidden" name="itemID" value=item._id)
-                  input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="delete")
-            
+                  input.mx-2.w-5.opacity-30(class="hover:cursor-pointer hover:opacity-100 icon-b-to-w" src='/images/icon_delete.svg' type="image", alt='Icon Edit')

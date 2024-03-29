@@ -1,26 +1,29 @@
-categories.text-white.w-full.p-4
-  div.flex.flex-row.font-bold
-    div.text-lg.font-bold.flex.items-center.p-2
+categories.text-white.p-4(class="w-[calc(100%-208px)]")
+  div.flex.flex-row.font-bold.w-auto.items-center(class="text-[16px]")
+    div.text-lg.font-bold.flex.items-center.p-2.ml-1
       span Categories
-    div.h-10.ml-auto.border-2.rounded(class="border-[#50ABFF]") Search 
-    button.h-10.ml-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/items/new"`) + New Item 
-    button.h-10.ml-3.mr-3.border-2.rounded(class="border-[#50ABFF]" onclick=`window.location.href="/categories/new"`) + New Category 
+    button.h-10.ml-auto.rounded.px-2(class="border-[#50ABFF] bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/items/new"`) + New Item 
+    button.h-10.ml-3.mr-3.rounded.px-2(class="border-[#50ABFF] bg-[#8a8f9418] hover:bg-[#8a8f9457]" onclick=`window.location.href="/categories/new"`) + New Category 
   div.mt-3.flex.flex-col
-    div.p-3.flex.justify-between.border-b-2(class="border-[#50aaff6c]")
-      span Name 
-      span Count
-      span Price 
-      span Total value
-    div.p-3
+    div.mx-3.pb-1.flex.justify-between.border-b-2.w-auto.text-sm(class="border-[#50aaff6c]")
+      span.truncate(class="w-[25%]") Name 
+      span.truncate(class="w-[25%]") Description
+      span.truncate(class="w-[25%]") URL 
+      span.truncate(class="w-[25%]")
+    div.mx-3
       each category, index in categories 
-        div.my-1.flex.justify-between(class="hover:cursor-pointer hover:ring bg-[#8a8f9418]" data-category-id=category._id onclick=`window.location.href="/categories/${category._id}"`)
-          div.p-1
+        div.my-1.flex.justify-between.w-auto.text-sm(class="max-h-[32px] hover:cursor-pointer bg-[#a9afb418] hover:bg-[#8a8f9457] category-row" data-category-id=category._id onclick=`window.location.href="/categories/${category._id}"`)
+          div.p-1.truncate(class="w-[25%]")
             span= category.name
-          div.flex.gap-1
-            form(action=`/categories/edit/${category._id}` method='POST') 
+          div.p-1.truncate(class="w-[25%]")
+            span= category.description
+          div.p-1.truncate(class="w-[25%]")
+            span= category.URL
+          div.flex.gap-1.items-center(class="w-[25%]")
+            form.flex.items-center.ml-auto(action=`/categories/edit/${category._id}` method='POST') 
               input(type="hidden" name="categoryID" value=category._id)
-              input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="edit")
-            form(action="/categories/delete" method='POST') 
+              input.w-5.opacity-30(class="hover:cursor-pointer hover:opacity-100 icon-b-to-w" src='/images/icon_edit.svg' type="image", alt='Icon Edit')
+            form.flex.items-center(action="/categories/delete" method='POST') 
               input(type="hidden" name="categoryID" value=category._id)
-              input.border-2.border-gray-600(class="hover:cursor-pointer hover:ring" type="submit" value="delete")
-            
+              input.mx-2.w-5.opacity-30(class="hover:cursor-pointer hover:opacity-100 icon-b-to-w" src='/images/icon_delete.svg' type="image", alt='Icon Edit')
+
