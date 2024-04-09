@@ -23,6 +23,10 @@
     background: linear-gradient(to right, #d9d9d92a, #d9d9d90a 80%, #d9d9d900)
 }
 
+.landing-gradient {
+    background: linear-gradient(to bottom, #245792, #1E2D3A);
+}
+
 .icon-b-to-w {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(288deg) brightness(105%) contrast(106%);
 }
@@ -58,5 +62,28 @@
 
 .button-type2:active {
     background-color: #23425e83;
+    
+}
+
+
+.button-type3 {
+    border: 1px solid #00B2FF;
+    background: linear-gradient(#09779888, #00435800 30%, #00435800 70%, #09779888);
+    border-radius: 0.25rem;
+    padding: 0 16px;
+}
+
+.button-type3:hover {
+    cursor: pointer;
+    background: linear-gradient(#0b8ab1da, #00435800 30%, #00435800 70%, #0b8ab1da);
+    background-color: #0b8ab128;
+
+}
+
+.button-type3:active {
+    background: linear-gradient(#097798c0, #00435800 30%, #00435800 70%, #097798c0);
+
+    background-color: #06556d28;
+    
     
 }

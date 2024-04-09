@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet' href='/styles/style.css')
+  body(class="landing-gradient").flex.flex-col.h-screen
+    if page === "sign-in"
+        include sign-in
+    else if page === "create-account"
+      include create-account
