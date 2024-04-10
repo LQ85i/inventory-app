@@ -21,6 +21,7 @@ exports.add_item = asyncHandler(async (req, res, next) => {
         stock: stock,
         URL: URL,
         category: category,
+        owner: req.user._id,
         expiresAfter: new Date()
     });
     res.redirect("/categories");
@@ -40,7 +41,7 @@ exports.update_item = asyncHandler(async (req, res, next) => {
     const newStock = req.body.itemStock;
     const newURL = req.body.itemURL;
     const newCategory = req.body.itemCategory;
-    await Item.findOneAndUpdate({ _id: itemID, }, {
+    await Item.findOneAndUpdate({owner: req.user._id, _id: itemID, }, {
         $set: {
             name: newName,
             description: newDescription,
@@ -48,6 +49,7 @@ exports.update_item = asyncHandler(async (req, res, next) => {
             stock: newStock,
             URL: newURL,
             category: newCategory,
+            owner: req.user._id,
             expiresAfter: new Date()
         }
     });
@@ -57,14 +59,14 @@ exports.update_item = asyncHandler(async (req, res, next) => {
 
 exports.delete_item = asyncHandler(async (req, res, next) => {
     const itemID = req.body.itemID;
-    await Item.deleteOne({ _id: itemID });
+    await Item.deleteOne({owner: req.user._id, _id: itemID });
     res.redirect("/categories");
 });
 
 
 exports.render_add_form = asyncHandler(async (req, res, next) => {
     const page = "new-item"
-    categoryData = await Category.find({}).exec();
+    categoryData = await Category.find({owner: req.user._id}).exec();
     res.render('layout', { title: 'New Item', page: page, categories: categoryData });
 });
 
@@ -73,8 +75,8 @@ exports.render_edit_form = asyncHandler(async (req, res, next) => {
     const IDToEdit = req.body.itemID;
     const page = "edit-item"
     const item = await Item.findOne({ _id: IDToEdit })
-    const category = await Category.findOne({ _id: item.category });
-    categoryData = await Category.find({}).exec();
+    const category = await Category.findOne({ owner: req.user._id, _id: item.category });
+    categoryData = await Category.find({owner: req.user._id}).exec();
     res.render('layout', { title: 'Edit Item', page: page, categories: categoryData, IDToEdit: IDToEdit, item: item, category: category });
 });
 

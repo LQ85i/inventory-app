@@ -6,6 +6,7 @@ const CategorySchema = Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   URL: { type: String, required: true },
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
   expiresAfter: {type: Date, required: true }
 })
 

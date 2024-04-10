@@ -9,7 +9,8 @@ const ItemSchema = Schema({
   stock: { type: Number, required: true },
   URL: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
-  expiresAfter: {type: Date, required: true }
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
+  expiresAfter: { type: Date, required: true }
 });
 
 // Export model
