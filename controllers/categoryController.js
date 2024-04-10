@@ -24,7 +24,7 @@ exports.render_categories = asyncHandler(async (req, res, next) => {
     categoryData = await Category.find({}).exec();
     itemData = await Item.find({}).exec();
     const page = "categories"
-    res.render('layout', { title: 'Categories', categories: categoryData, items: itemData, page: page });
+    res.render('layout', { title: 'Categories', categories: categoryData, items: itemData, page: page});
 });
 
 exports.update_category = asyncHandler(async (req, res, next) => {
