@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const passport = require("../config/passport-config")
+const bcrypt = require("bcryptjs");
 
 const asyncHandler = require("express-async-handler");
 
@@ -20,18 +21,24 @@ exports.create_account = asyncHandler(async (req, res, next) => {
     const usernameTaken = await User.findOne({ username: username, });
     if (!usernameTaken) {
       try {
-        const user = await User.create({
-          username: username,
-          password: password,
-          expiresAfter: new Date()
-        });
-        req.login(user, function (err) {
-          if (err) {
+        bcrypt.hash(password, 10, async (err, hashedPassword) => {
+          if(err) {
             return next(err);
           }
-          res.locals.currentUser = req.user;
-          res.redirect("/categories");
-        })
+          const user = await User.create({
+            username: username,
+            password: hashedPassword,
+            expiresAfter: new Date()
+          });
+          req.login(user, function (err) {
+            if (err) {
+              return next(err);
+            }
+            res.locals.currentUser = req.user;
+            res.redirect("/categories");
+          })
+        });
+        
       } catch (err) {
         return next(err);
       }
