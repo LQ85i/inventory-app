@@ -10,7 +10,7 @@ const userSignedIn = (req, res, next) => {
         const owner = req.user._id;
     } catch (error) {
         const customError = new Error("You must be signed in to view this page");
-        return next(customError);
+        return () => next(customError);
     }
     return;
 };

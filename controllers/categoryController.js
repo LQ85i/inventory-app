@@ -11,7 +11,7 @@ const userSignedIn = (req, res, next) => {
     const owner = req.user._id;
   } catch (error) {
     const customError = new Error("You must be signed in to view this page");
-    return next(customError);
+    return () => next(customError);
   }
   return;
 };
@@ -41,7 +41,7 @@ exports.render_categories = asyncHandler(async (req, res, next) => {
       itemData = await Item.find({ owner: req.user._id }).exec();
       const page = "categories"
       res.render('layout', { title: 'Categories', categories: categoryData, items: itemData, page: page });
-    } catch (error) {
+    } catch (err) {
       return next(err);
     }
   }
