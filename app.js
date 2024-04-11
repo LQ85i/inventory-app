@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require("./config/passport-config");
 var session = require("express-session");
-var bcrypt = require("bcryptjs");
+
 
 require('dotenv').config();
 
@@ -24,7 +24,7 @@ const mongoDB = process.env.MONGODB;
 main().catch((err) => console.log(err));
 async function main() { await mongoose.connect(mongoDB); }
 
-app.use(session({ secret: "cats", resave: false, saveUnitialized: true }));
+app.use(session({ secret: process.env.session_secret, resave: false, saveUninitialized: true }));
 app.use(passport.session());
 
 // bodyParser is required for the sign-in to work
