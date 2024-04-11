@@ -19,7 +19,8 @@ create-account.flex.h-full.flex-col
     div.flex.mt-3
       span.mx-auto Or 
         a.underline(href="/") Sign In
-
+    if(nameTakenError === true)
+      div.text-red-600.font-bold.text-center.mt-3 Username unavailable
 
 script.
   document.addEventListener("DOMContentLoaded", function() {

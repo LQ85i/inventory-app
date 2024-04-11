@@ -16,3 +16,5 @@ sign-in.flex.h-full.flex-col
     div.flex.mt-3
       span.mx-auto Or 
         a.underline(href="/create-account") Create Account
+    if(signInError === true)
+      div.text-red-600.font-bold.text-center.mt-3 Error signing in

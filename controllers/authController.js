@@ -4,14 +4,29 @@ const bcrypt = require("bcryptjs");
 
 const asyncHandler = require("express-async-handler");
 
+let nameTakenError = false;
+let signInError = false;
+
+const userSignedIn = (req, res, next) => {
+  try {
+    const owner = req.user._id;
+  } catch (error) {
+    const customError = new Error("You must be signed in to view this page");
+    return next(customError);
+  }
+  return;
+};
+
 exports.render_landing = asyncHandler(async (req, res, next) => {
   const page = "sign-in"
-  res.render('landing', { title: 'Inventory Management App', page: page });
+  nameTakenError = false;
+  res.render('landing', { title: 'Inventory Management App', page: page, signInError: signInError });
 });
 
 exports.render_create_account = asyncHandler(async (req, res, next) => {
   const page = "create-account"
-  res.render('landing', { title: 'Inventory Management App', page: page });
+  signInError = false;
+  res.render('landing', { title: 'Inventory Management App', page: page, nameTakenError: nameTakenError });
 });
 
 exports.create_account = asyncHandler(async (req, res, next) => {
@@ -22,7 +37,7 @@ exports.create_account = asyncHandler(async (req, res, next) => {
     if (!usernameTaken) {
       try {
         bcrypt.hash(password, 10, async (err, hashedPassword) => {
-          if(err) {
+          if (err) {
             return next(err);
           }
           const user = await User.create({
@@ -38,12 +53,13 @@ exports.create_account = asyncHandler(async (req, res, next) => {
             res.redirect("/categories");
           })
         });
-        
+
       } catch (err) {
         return next(err);
       }
     } else {
-      res.redirect("/");
+      nameTakenError = true;
+      res.redirect("/create-account");
     }
   } catch (err) {
     return next(err);
@@ -52,19 +68,36 @@ exports.create_account = asyncHandler(async (req, res, next) => {
 });
 
 exports.sign_out = asyncHandler(async (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-
+  const error = userSignedIn(req, res, next);
+  if (error) { error(); } else {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      signInError = false;
+      nameTakenError = false;
+      res.redirect("/");
+    });
+  }
 });
 
 exports.sign_in = asyncHandler(async (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/categories",
-    failureRedirect: "/"
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      signInError = true;
+      return res.redirect("/");
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        signInError = true;
+        return next(err);
+      }
+      signInError = false;
+      return res.redirect("/categories");
+    });
   })(req, res, next);
 });
 

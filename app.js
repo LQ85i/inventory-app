@@ -52,13 +52,18 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // Determine whether to show error details based on the environment
+  const showDetails = req.app.get('env') === 'development';
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // Set the response status code
+  const statusCode = err.status || 500;
+
+  // Send the error response
+  res.status(statusCode).render('error', {
+    message: err.message,
+    status: statusCode,
+    stack: showDetails ? err.stack : null
+  });
 });
 
 module.exports = app;
