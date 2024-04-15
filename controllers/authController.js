@@ -12,6 +12,7 @@ const userSignedIn = (req, res, next) => {
     const owner = req.user._id;
   } catch (error) {
     const customError = new Error("You must be signed in to view this page");
+    customError.code = "401"
     return next(customError);
   }
   return;
@@ -68,8 +69,8 @@ exports.create_account = asyncHandler(async (req, res, next) => {
 });
 
 exports.sign_out = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     req.logout((err) => {
       if (err) {
         return next(err);

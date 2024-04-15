@@ -4,6 +4,8 @@ html
     title= title
     link(rel='stylesheet' href='/styles/style.css')
   body.flex.flex-col.h-screen.text-white.text-center.mt-10.text-xl(class="landing-gradient min-h-[800px]")
+    button.absolute(class="mt-[-35px] ml-[5px]" onclick=`window.location.href="/"`)
+      img.w-10.h-10.opacity-50(class="icon-b-to-w" src='/images/icon_home.svg' alt='Icon Person')
     h1 Error #{status}
     h2= message
     pre.text-left.ml-10.mt-10.text-sm #{stack}

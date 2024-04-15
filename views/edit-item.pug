@@ -1,9 +1,10 @@
 edit-item.text-white.w-full.p-4
   div.flex.flex-row.font-bold.items-center
-    button.h-10.ml-3(class="button-type1" onclick=`window.location.href="/categories"`) Back
+    button.h-10.ml-3(class="button-type1" onclick=`window.location.href="/categories/${item.category}"`) Back
   div.mt-3.flex.flex-col  
     form.p-3.text-sm(action="/items/update" method='POST') 
       h4.text-xl.border-b-2.border-gray-500.pb-2  Edit item
+      input(type="hidden" name="itemID" value=item._id)
       label.mt-4.flex.h-6.items-center(for="name") 
         span.w-32 Item name: 
         input.border-2.p-1(id="name" type="text" name="itemName" value=item.name class="border-[#50aaff81] bg-[#152e4483] hover:border-[#50ABFF] focus:border-[#50ABFF]" required)

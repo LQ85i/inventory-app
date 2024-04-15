@@ -1,11 +1,12 @@
 items.text-white.w-full.p-4
-  div.flex.flex-row.font-bold.items-center
+  div.flex.flex-row.font-bold.items-center.h-16
     button.h-10.ml-3(class="button-type1" onclick=`window.location.href="/categories"`) Back
-    div.text-lg.font-bold.flex.items-center.p-2.ml-2
-      span= currentCategory.name
+    div.text-lg.flex.flex-col.ml-4
+      div.text-xs.font-normal(class="text-[#2cb6f7]") Category name: 
+      div.font-bold #{currentCategory.name}
     button.h-10.ml-auto(class="button-type1" onclick=`window.location.href="/items/new"`) + New Item 
     button.h-10.ml-3.mr-3(class="button-type1" onclick=`window.location.href="/categories/new"`) + New Category 
-  div.mt-3.flex.flex-col
+  div.mt-1.flex.flex-col
     div.mx-3.pb-1.flex.justify-between.border-b-2.w-auto.text-sm(class="border-[#50aaff6c]")
       span.truncate(class="w-[18%]") Name 
       span.truncate(class="w-[18%]") Description

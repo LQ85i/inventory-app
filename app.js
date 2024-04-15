@@ -56,7 +56,7 @@ app.use(function (err, req, res, next) {
   const showDetails = req.app.get('env') === 'development';
 
   // Set the response status code
-  const statusCode = err.status || 500;
+  const statusCode = err.status || err.code || 500;
 
   // Send the error response
   res.status(statusCode).render('error', {

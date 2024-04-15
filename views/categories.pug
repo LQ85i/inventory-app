@@ -1,13 +1,13 @@
 categories.text-white.p-4(class="w-[calc(100%-208px)]")
-  div.flex.flex-row.font-bold.w-auto.items-center(class="text-[16px]")
-    div.text-lg.font-bold.flex.items-center.p-2.ml-1
+  div.flex.flex-row.font-bold.w-auto.items-center.h-16(class="text-[16px]")
+    div.text-lg.font-bold.flex.items-center.ml-3
       span Categories
     if(categories.length)
       button.h-10.ml-auto(class="button-type1" onclick=`window.location.href="/items/new"`) + New Item 
     else
       div.ml-auto
     button.h-10.ml-3.mr-3(class="button-type1" onclick=`window.location.href="/categories/new"`) + New Category 
-  div.mt-3.flex.flex-col
+  div.mt-1.flex.flex-col
     div.mx-3.pb-1.flex.justify-between.border-b-2.w-auto.text-sm(class="border-[#50aaff6c]")
       span.truncate(class="w-[30%]") Name 
       span.truncate(class="w-[30%]") Description

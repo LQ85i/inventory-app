@@ -11,14 +11,15 @@ const userSignedIn = (req, res, next) => {
     const owner = req.user._id;
   } catch (error) {
     const customError = new Error("You must be signed in to view this page");
+    customError.code = "401"
     return () => next(customError);
   }
   return;
 };
 
 exports.add_category = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     const name = req.body.categoryName;
     const description = req.body.categoryDescription;
     const URL = req.body.categoryURL;
@@ -34,8 +35,8 @@ exports.add_category = asyncHandler(async (req, res, next) => {
 });
 
 exports.render_categories = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     try {
       categoryData = await Category.find({ owner: req.user._id }).exec();
       itemData = await Item.find({ owner: req.user._id }).exec();
@@ -48,13 +49,13 @@ exports.render_categories = asyncHandler(async (req, res, next) => {
 });
 
 exports.update_category = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     const categoryID = req.body.categoryID;
     const newName = req.body.categoryName;
     const newDescription = req.body.categoryDescription;
     const newURL = req.body.categoryURL;
-    await Category.findOneAndUpdate({ owner: req.user._id, _id: categoryID, }, {
+    await Category.findOneAndUpdate({ _id: categoryID, }, {
       $set: {
         name: newName,
         description: newDescription,
@@ -68,17 +69,17 @@ exports.update_category = asyncHandler(async (req, res, next) => {
 });
 
 exports.delete_category = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     const categoryID = req.body.categoryID;
-    await Category.deleteOne({ owner: req.user._id, _id: categoryID });
+    await Category.deleteOne({ _id: categoryID });
     res.redirect("/categories");
   }
 });
 
 exports.render_add_form = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     const page = "new-category"
     res.render('layout', { title: 'New Category', page: page });
   }
@@ -86,21 +87,21 @@ exports.render_add_form = asyncHandler(async (req, res, next) => {
 
 
 exports.render_edit_form = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     const categoryID = req.body.categoryID;
     const page = "edit-category"
-    const category = await Category.findOne({ owner: req.user._id, _id: categoryID }).exec();
+    const category = await Category.findOne({ _id: categoryID }).exec();
     res.render('layout', { title: 'Edit Category', category: category, page: page, categoryID: categoryID });
   }
 });
 
 exports.render_items = asyncHandler(async (req, res, next) => {
-  const error = userSignedIn(req, res, next);
-  if (error) { error(); } else {
+  const authError = userSignedIn(req, res, next);
+  if (authError) { authError(); } else {
     itemData = await Item.find({ owner: req.user._id }).exec();
     const categoryID = req.params.objectId;
-    const currentCategory = await Category.findOne({ owner: req.user._id, _id: categoryID }).exec();
+    const currentCategory = await Category.findOne({ _id: categoryID }).exec();
     const page = "items"
     res.render('layout', { title: 'Items', currentCategory: currentCategory, items: itemData, page: page });
   }
