@@ -7,16 +7,11 @@ const asyncHandler = require("express-async-handler");
 let nameTakenError = false;
 let signInError = false;
 
-const userSignedIn = (req, res, next) => {
-  try {
-    const owner = req.user._id;
-  } catch (error) {
-    const customError = new Error("You must be signed in to view this page");
-    customError.code = "401"
-    return next(customError);
-  }
-  return;
-};
+const authError = (next) => {
+  const customError = new Error("You must be signed in to view this page");
+  customError.code = "401"
+  return () => next(customError);
+}
 
 exports.render_landing = asyncHandler(async (req, res, next) => {
   const page = "sign-in"
@@ -69,8 +64,9 @@ exports.create_account = asyncHandler(async (req, res, next) => {
 });
 
 exports.sign_out = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     req.logout((err) => {
       if (err) {
         return next(err);
