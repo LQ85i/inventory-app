@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production nodemon ./bin/www",
+    "start": "NODE_ENV=production node ./bin/www",
     "tailwind:css": "postcss public/styles/tailwind.css -o public/styles/style.css --watch",
     "devStart": "npm start & npm run tailwind:css"
   },
@@ -31,5 +31,8 @@
   "main": "app.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.7"
+  }
 }

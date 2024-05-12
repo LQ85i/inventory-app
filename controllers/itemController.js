@@ -5,20 +5,17 @@ const asyncHandler = require("express-async-handler");
 
 let categoryData = []
 let itemData = []
-const userSignedIn = (req, res, next) => {
-  try {
-    const owner = req.user._id;
-  } catch (error) {
-    const customError = new Error("You must be signed in to view this page");
-    customError.code = "401"
-    return () => next(customError);
-  }
-  return;
-};
+
+const authError = (next) => {
+  const customError = new Error("You must be signed in to view this page");
+  customError.code = "401"
+  return () => next(customError);
+}
 
 exports.add_item = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     const name = req.body.itemName;
     const description = req.body.itemDescription;
     const price = req.body.itemPrice;
@@ -39,18 +36,10 @@ exports.add_item = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.render_item = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
-    const page = "items"
-    res.render('layout', { title: 'Items', currentCategory: currentCategory, items: itemData, page: page });
-  }
-});
-
-
 exports.update_item = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     const itemID = req.body.itemID;
     const newName = req.body.itemName;
     const newDescription = req.body.itemDescription;
@@ -77,8 +66,9 @@ exports.update_item = asyncHandler(async (req, res, next) => {
 
 
 exports.delete_item = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     const itemID = req.body.itemID;
     await Item.deleteOne({ _id: itemID });
     res.redirect("/categories");
@@ -87,8 +77,9 @@ exports.delete_item = asyncHandler(async (req, res, next) => {
 
 
 exports.render_add_form = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     const page = "new-item"
     categoryData = await Category.find({ owner: req.user._id }).exec();
     res.render('layout', { title: 'New Item', page: page, categories: categoryData });
@@ -97,8 +88,9 @@ exports.render_add_form = asyncHandler(async (req, res, next) => {
 
 
 exports.render_edit_form = asyncHandler(async (req, res, next) => {
-  const authError = userSignedIn(req, res, next);
-  if (authError) { authError(); } else {
+  if (!req.user) {
+    authError(next)();
+  } else {
     const IDToEdit = req.body.itemID;
     const page = "edit-item"
     const item = await Item.findOne({ _id: IDToEdit })
