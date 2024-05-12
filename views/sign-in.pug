@@ -3,12 +3,12 @@ sign-in.flex.h-full.flex-col
     span Welcome to Inventory Management App
   div.mx-auto.mt-7.text-white.text-base
     form(action="sign-in" method='POST') 
-      div.mx-auto.w-40.font-bold
+      div.mx-auto.w-44.font-bold
         span.ml-2 Sign in to proceed:
-      label.flex.mx-auto.w-52.mt-3(for="username")
+      label.flex.mx-auto.w-56.mt-3(for="username")
         img.mr-3.w-5(class="icon-b-to-w" src='/images/icon_person.svg' alt='Icon Person')
         input.bg-white.border-2.rounded.w-44.text-gray-800.text-sm(class="border-[#50aaff81] hover:border-[#50ABFF] focus:border-[#50ABFF] p-[2px]" id="username" name="username" type="text" placeholder="Username" max="32" required) 
-      label.flex.mx-auto.w-52.mt-3(for="password")
+      label.flex.mx-auto.w-56.mt-3(for="password")
         img.mr-3.w-5(class="icon-b-to-w" src='/images/icon_key.svg' alt='Icon Key')
         input.bg-white.border-2.rounded.w-44.text-gray-800.text-sm(class="border-[#50aaff81] hover:border-[#50ABFF] focus:border-[#50ABFF] p-[2px]" id="password" name="password" type="password" placeholder="Password" max="128" required) 
       label.w-24.flex.mt-6.mx-auto(for="sign-in")

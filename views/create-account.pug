@@ -3,15 +3,15 @@ create-account.flex.h-full.flex-col
     span Welcome to Inventory Management App
   div.mx-auto.mt-7.text-white.text-base
     form(action="create-account" method='POST') 
-      div.mx-auto.w-56.font-bold.flex
+      div.mx-auto.w-60.font-bold.flex
         span.ml-10 Create a new account:
-      label.flex.mx-auto.w-52.mt-3(for="username")
+      label.flex.mx-auto.w-56.mt-3(for="username")
         img.mr-3.w-5(class="icon-b-to-w" src='/images/icon_person.svg' alt='Icon Person')
         input.bg-white.border-2.rounded.w-44.text-gray-800.text-sm(class="border-[#50aaff81] hover:border-[#50ABFF] focus:border-[#50ABFF] p-[2px]" id="username" name="username" type="text" placeholder="Username" max="32" required) 
-      label.flex.mx-auto.w-52.mt-3(for="password")
+      label.flex.mx-auto.w-56.mt-3(for="password")
         img.mr-3.w-5(class="icon-b-to-w" src='/images/icon_key.svg' alt='Icon Key')
         input.bg-white.border-2.rounded.w-44.text-gray-800.text-sm(class="border-[#50aaff81] hover:border-[#50ABFF] focus:border-[#50ABFF] p-[2px]" id="password" name="password" type="password" placeholder="Password" max="128" required) 
-      label.flex.mx-auto.w-52.mt-3(for="password-confirm")
+      label.flex.mx-auto.w-56.mt-3(for="password-confirm")
         img.mr-3.w-5(class="icon-b-to-w" src='/images/icon_key.svg' alt='Icon Key')
         input.bg-white.border-2.rounded.w-44.text-gray-800.text-sm(class="border-[#50aaff81] hover:border-[#50ABFF] focus:border-[#50ABFF] p-[2px]" id="password-confirm" type="password" placeholder="Confirm Password" max="128" required) 
       label.w-40.flex.mt-6.mx-auto(for="create-account")
