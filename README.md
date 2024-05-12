@@ -23,11 +23,11 @@ Back-end:
 
 ## Features
 
-Functionality:
-- Sign in or create account
+Functional:
+- Sign in/out or create an account
 - View, add, update and delete inventory categories and items
 
 Technical:
 - All data is user bound and unauthorized attempts will result in an error
 - All data is removed 24 hours from creation to reduce database load
-- Error handling includes custom error pages, form validation and added text elements (like error signing in)
+- Error handling includes error page, form validation and added text elements (like error signing in)
