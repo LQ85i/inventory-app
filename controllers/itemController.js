@@ -47,7 +47,6 @@ exports.update_item = asyncHandler(async (req, res, next) => {
     const newStock = req.body.itemStock;
     const newURL = req.body.itemURL;
     const newCategory = req.body.itemCategory;
-    console.log(itemID, newName, newDescription, newPrice, newStock, newURL, newCategory);
     await Item.findOneAndUpdate({ _id: itemID, }, {
       $set: {
         name: newName,
