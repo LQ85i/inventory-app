@@ -52,15 +52,15 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // Determine whether to show error details based on the environment
+  // show error details based on the environment
   const showDetails = req.app.get('env') === 'development';
 
-  // Set the response status code
+  // set the response status code
   const statusCode = err.status || err.code || 500;
 
-  // Send the error response
+  // send the error response
   res.status(statusCode).render('error', {
-    message: err.message,
+    message: showDetails ? err.message : null,
     status: statusCode,
     stack: showDetails ? err.stack : null
   });
